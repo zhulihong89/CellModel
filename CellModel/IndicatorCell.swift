@@ -14,7 +14,7 @@ extension CellModel {
     }
 }
 
-private class IndicatorCell: UITableViewCell, CellModelProtocol {
+private class IndicatorCell: UITableViewCell, CellProtocol {
     let indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
 
     static func height(tableView: UITableView, data: Any?) -> CGFloat {

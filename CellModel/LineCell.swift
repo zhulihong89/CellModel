@@ -14,7 +14,7 @@ extension CellModel {
     }
 }
 
-private class LineCell: UITableViewCell, CellModelProtocol {
+private class LineCell: UITableViewCell, CellProtocol {
     let left: CGFloat
     let right: CGFloat
     let line = UIView()

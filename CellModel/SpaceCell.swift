@@ -14,7 +14,7 @@ extension CellModel {
     }
 }
 
-private class SpaceCell: UITableViewCell, CellModelProtocol  {
+private class SpaceCell: UITableViewCell, CellProtocol  {
     
     let cellHeight: CGFloat
     

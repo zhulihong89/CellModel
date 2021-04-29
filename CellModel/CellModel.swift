@@ -9,25 +9,10 @@
 import UIKit
 
 
-public protocol CellModelProtocol {
-    func set(viewController: UIViewController?, indexPath: IndexPath, data: Any?)
-    static func height(tableView: UITableView, data: Any?) -> CGFloat
-}
-
-public extension CellModelProtocol {
-    func set(viewController: UIViewController?, indexPath: IndexPath, data: Any?) {
-
-    }
-    static func height(tableView: UITableView, data: Any?) -> CGFloat {
-        return 44
-    }
-}
-
-
 public struct CellModel {
     private let data: Any?
     private let identifier: String?
-    private let cell: (CellModelProtocol & UITableViewCell)?
+    private let cell: (CellProtocol & UITableViewCell)?
     private let height: CGFloat?
     private let didSelectBlock: (() -> Void)?
     
@@ -39,7 +24,7 @@ public struct CellModel {
         self.didSelectBlock = didSelect
     }
     
-    public init(data: Any? = nil, cell: CellModelProtocol & UITableViewCell, height: CGFloat? = nil, didSelect: (() -> Void)? = nil) {
+    public init(data: Any? = nil, cell: CellProtocol & UITableViewCell, height: CGFloat? = nil, didSelect: (() -> Void)? = nil) {
         self.data = data
         self.cell = cell
         self.height = height
@@ -48,9 +33,9 @@ public struct CellModel {
     }
     
     public func getCell(viewController: UIViewController? = nil, tableView: UITableView, indexPath: IndexPath) -> UITableViewCell? {
-        var cell: (CellModelProtocol & UITableViewCell)?
+        var cell: (CellProtocol & UITableViewCell)?
         if let identifier = identifier {
-            cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? (CellModelProtocol & UITableViewCell)
+            cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? (CellProtocol & UITableViewCell)
         } else {
             cell = self.cell
         }
@@ -66,7 +51,7 @@ public struct CellModel {
         if let cell = cell {
             return type(of: cell).height(tableView: tableView, data: data)
         }
-        if let identifier = identifier, let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? CellModelProtocol {
+        if let identifier = identifier, let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? CellProtocol {
             return type(of: cell).height(tableView: tableView, data: data)
         }
         
